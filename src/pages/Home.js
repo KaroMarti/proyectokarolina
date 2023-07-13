@@ -12,10 +12,12 @@ const Home = () => {
 
     }
     
-    const url='https://api.api-ninjas.com/v1/celebrity?name='+'Michael Jordan'
+    const nombre = 'Michael Jordan';
+
+    const url='https://api.api-ninjas.com/v1/celebrity?name='+nombre
 
     useEffect ( ()=>{
-        Axios.get (url)
+        Axios.get (url, {headers})
         .then(resp=>{console.log(resp.data)})
         .catch(error=>{console.log(error)})
     },[]
