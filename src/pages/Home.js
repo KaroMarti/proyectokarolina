@@ -1,10 +1,11 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import React from 'react'
+import React, { Fragment } from 'react'
 import Axios from 'axios'
 import { useEffect, useState } from 'react';
 
 const Home = () => {
-    const {user, isAuthenticated, isLoading} = useAuth0();
+    const {user} = useAuth0();
+    const [celebrity, setCelebrity] = useState([]);
 
     const key =  process.env.REACT_APP_KEY;
     const headers = { 
@@ -20,24 +21,30 @@ const Home = () => {
         console.log(key);
 
         Axios.get (url, {headers})
-        .then(resp=>{console.log(resp.data)})
+        .then(resp=>{console.log(resp.data)
+        setCelebrity(resp.data)
+        console.log(celebrity)
+    })
         .catch(error=>{console.log(error)})
     },[]
 
     )
-
-    if (isLoading) {
-        return <div> Cargando ...</div>;
-        
-    }
-
+    
     return (
-        isAuthenticated && (
-            <div>
-                <h3>{user.name}</h3>
-             </div>
-        )
-    );
+        <div> <h3>{user.name}</h3>
+        
+        <div>
+            {celebrity.map(cel=>{return(
+                <Fragment>
+                <h4>{cel.name}</h4>
+                <h2>{cel.age}</h2>
+                </Fragment>
+
+            )})}
+        </div>
+
+        </div>
+    ) 
 
 
 }
