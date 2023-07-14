@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 const Home = () => {
     const {user, isAuthenticated, isLoading} = useAuth0();
 
-    const key = 'YI5N/XtqOtRlREc63OktNg==Pd5fI84y8YQtlYjx';
+    const key =  process.env.REACT_APP_KEY;
     const headers = { 
         'X-Api-Key': key
 
@@ -14,9 +14,11 @@ const Home = () => {
     
     const nombre = 'Michael Jordan';
 
-    const url='https://api.api-ninjas.com/v1/celebrity?name='+nombre
+    const url= process.env.REACT_APP_URL_APP+nombre;
 
     useEffect ( ()=>{
+        console.log(key);
+
         Axios.get (url, {headers})
         .then(resp=>{console.log(resp.data)})
         .catch(error=>{console.log(error)})
