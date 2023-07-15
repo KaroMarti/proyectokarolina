@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import React, { Fragment } from 'react'
+import React, { Fragment, Profiler } from 'react'
 import Axios from 'axios'
 import { useEffect, useState } from 'react';
 
@@ -38,6 +38,13 @@ const Home = () => {
                 <Fragment>
                 <h4>{cel.name}</h4>
                 <h2>{cel.age}</h2>
+                {cel.occupation.map(prof => {
+                    return(
+                    <p> {prof}</p>
+                )
+            }
+                )
+            }
                 </Fragment>
 
             )})}
